@@ -1,4 +1,4 @@
-import { DataSource, Repository } from "typeorm";
+import { DataSource, FindOptionsWhere, Repository } from "typeorm";
 import { User } from "../../entity/user";
 
 export class UserRepository {
@@ -11,7 +11,7 @@ export class UserRepository {
         return this.userRepo.save(user)
     }
 
-    fetchUser(id: string){
-        return this.userRepo.findOneBy({ id })
+    fetchUser(opt: FindOptionsWhere<User>){
+        return this.userRepo.findOneBy(opt)
     }
 }

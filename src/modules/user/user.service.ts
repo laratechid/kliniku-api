@@ -1,3 +1,4 @@
+import { FindOptionsWhere } from "typeorm";
 import { UserDto } from "../../dto/user";
 import { User } from "../../entity/user";
 import { response } from "../../helper/response";
@@ -17,8 +18,9 @@ export class UserService {
     }
 
     async getUser(res: Res, id: string){
-        const data = await this.userRepo.fetchUser(id)
-        if(!data) response(res, "user not found", 401)
+        const opt: FindOptionsWhere<User> = { id }
+        const data = await this.userRepo.fetchUser(opt)
+        if(!data) response(res, "user not found", 400)
         return data
     }
 }
