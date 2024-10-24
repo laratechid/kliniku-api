@@ -10,7 +10,7 @@ $ 20.16.0
 $ npm install
 ```
 
-## Running the app
+## Run app
 
 ```bash
 # development mode
@@ -21,7 +21,7 @@ $ npm run build
 $ npm run start
 ```
 
-## Running with Docker
+## Run with Docker
 
 ```bash
 $ docker-compose up
