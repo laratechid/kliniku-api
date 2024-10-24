@@ -1,0 +1,35 @@
+{
+  "name": "kliniku-api",
+  "version": "1.0.0",
+  "description": "main api of kliniku-apps",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/app.ts"
+  },
+  "author": "sholehbaktiabadi",
+  "license": "ISC",
+  "homepage": "https://github.com/laratechid/kliniku-api#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laratechid/kliniku-api.git"
+  },
+  "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "fastify": "^5.0.0",
+    "googleapis": "^144.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql": "^2.18.1",
+    "signale": "^1.4.0",
+    "typeorm": "^0.3.20"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.3",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.7.9",
+    "@types/signale": "^1.4.7",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2"
+  }
+}
