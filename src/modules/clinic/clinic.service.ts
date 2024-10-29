@@ -1,6 +1,7 @@
 import { Res } from "../../types/fastify";
 import { ClinicRepository } from "./clinic.repository";
 import { response, responsePaginate } from "../../helper/response";
+import { PaginationDto } from "../../dto/pagination.dto";
 
 export class ClinicService{
     private clinicRepository: ClinicRepository
@@ -14,8 +15,7 @@ export class ClinicService{
         return data
     }
 
-    async getAll(res: Res){
-        const [data, count] = await this.clinicRepository.getAll()
-        return responsePaginate(res, data, count, 1, 10)
+    async getAll(res: Res, pagination: PaginationDto){
+        return await this.clinicRepository.getAll(pagination)
     }
 }

@@ -1,5 +1,6 @@
 import { DataSource, Repository } from "typeorm";
 import { Clinic } from "../../entity/clinic";
+import { PaginationDto } from "../../dto/pagination.dto";
 
 export class ClinicRepository{
     private clinicRepo : Repository<Clinic>
@@ -15,10 +16,12 @@ export class ClinicRepository{
         .getOne()
     }
 
-    getAll(){
+    getAll({ limit, skip }: PaginationDto){
         return this.clinicRepo.createQueryBuilder("clinic")
         .leftJoinAndSelect("clinic.polyclinics", "polyclinics")
         .leftJoinAndSelect("polyclinics.poly", "poly")
+        .take(limit)
+        .skip(skip)
         .getManyAndCount()
     }
 }
