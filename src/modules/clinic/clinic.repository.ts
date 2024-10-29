@@ -12,11 +12,13 @@ export class ClinicRepository{
         .where("clinic.id = :id", { id })
         .leftJoinAndSelect("clinic.polyclinics", "polyclinics")
         .leftJoinAndSelect("polyclinics.poly", "poly")
-        .leftJoinAndSelect("polyclinics.queues", "queues")
         .getOne()
     }
 
     getAll(){
-        return this.clinicRepo.findAndCount()
+        return this.clinicRepo.createQueryBuilder("clinic")
+        .leftJoinAndSelect("clinic.polyclinics", "polyclinics")
+        .leftJoinAndSelect("polyclinics.poly", "poly")
+        .getManyAndCount()
     }
 }
