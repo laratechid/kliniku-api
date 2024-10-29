@@ -17,7 +17,7 @@ export class UserService {
         return await this.userRepo.createUser(user)
     }
 
-    async getUser(res: Res, id: string){
+    async getUser(res: Res, id: number){
         const opt: FindOptionsWhere<User> = { id }
         const data = await this.userRepo.fetchUser(opt)
         if(!data) response(res, "user not found", 400)

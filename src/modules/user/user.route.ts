@@ -10,7 +10,7 @@ class UserRoute {
     static userService = new UserService(UserRoute.userRepository)
 
     static async getUser(req: Req, res: Res){
-        const { id } = req.params as { id: string }
+        const { id } = req.params as { id: number }
         const data = await this.userService.getUser(res, id)
         return response(res, data)
     }

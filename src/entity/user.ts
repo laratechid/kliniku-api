@@ -1,10 +1,9 @@
-import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
-import { Base } from "./base"
+import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm"
 
 @Entity({ name: "user" })
 export class User {
-    @PrimaryGeneratedColumn("uuid", { name: "id" })
-    id: string
+    @PrimaryGeneratedColumn()
+    id: number;
     
     @Column()
     name: string
@@ -21,17 +20,18 @@ export class User {
     @Column({ nullable: true })
     ktp: string
 
-    // longitude coordinates
     @Column({ nullable: true })
     lon: string
 
-    // latitude coordinates
     @Column({ nullable: true })
     lat: string
 
-    @CreateDateColumn()
+    @CreateDateColumn({ select: false })
     createdAt: Date
     
-    @UpdateDateColumn()
+    @UpdateDateColumn({ select: false })
     updatedAt: Date
+
+    @DeleteDateColumn({ select: false })
+    deletedAt: Date
 }

@@ -7,6 +7,7 @@ import { userRoutes } from './modules/user/user.route'
 import { authRoutes } from './modules/auth/auth.route'
 import { response } from './helper/response'
 import cookie from '@fastify/cookie'
+import { clinicRoutes } from './modules/clinic/clinic.route'
 
 async function bootstrap() {
     const isConnected = await mysqlInit()
@@ -15,8 +16,11 @@ async function bootstrap() {
     const app = Fastify({ logger: true })
     app.register(cookie)
     app.get("/", (_, res: Res) => response(res, 'ok'))
+
     app.register(userRoutes, { prefix: "/user" })
     app.register(authRoutes, { prefix: "/auth/google" })
+    app.register(clinicRoutes, { prefix: "/clinic" })
+
     app.listen({ port: env.appPort }, ()=> successLog(`app running on port: ${env.appPort}`))
 }
 

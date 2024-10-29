@@ -1,13 +1,15 @@
-import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 
 export abstract class Base {
     @PrimaryGeneratedColumn()
     id: number
     
-    @CreateDateColumn()
+    @CreateDateColumn({ select: false })
     createdAt: Date
     
-    @UpdateDateColumn()
+    @UpdateDateColumn({ select: false })
     updatedAt: Date
 
+    @DeleteDateColumn({ select: false })
+    deletedAt: Date
 }
