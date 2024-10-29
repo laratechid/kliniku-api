@@ -1,5 +1,5 @@
 import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne, JoinColumn, DeleteDateColumn, OneToMany, OneToOne } from "typeorm"
-import { ClinicPoly } from "./clinic-poly"
+import { PolyClinic } from "./polyclinic"
 
 @Entity({ name: "poly" })
 export class Poly {
@@ -21,6 +21,6 @@ export class Poly {
     @DeleteDateColumn({ select: false })
     deletedAt: Date;
 
-    @OneToOne(() => ClinicPoly, (clinicPoly) => clinicPoly.poly)
-    clinicPolys: ClinicPoly[];
+    @OneToMany(() => PolyClinic, (polyclinic) => polyclinic.poly)
+    polyclinics: PolyClinic[];
 }

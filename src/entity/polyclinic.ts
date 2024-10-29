@@ -3,8 +3,8 @@ import { Clinic } from "./clinic"
 import { Poly } from "./poly"
 import { Queue } from "./queue";
 
-@Entity({ name: "clinic_poly" })
-export class ClinicPoly {
+@Entity({ name: "polyclinic" })
+export class PolyClinic {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -23,11 +23,11 @@ export class ClinicPoly {
     @DeleteDateColumn({ select: false })
     deletedAt: Date;
 
-    @ManyToOne(() => Clinic, (clinic) => clinic.clinicPolys)
+    @ManyToOne(() => Clinic, (clinic) => clinic.polyclinics)
     @JoinColumn({ name: 'clinicId' })
     clinic: Clinic;
 
-    @OneToOne(() => Poly, (poly) => poly.clinicPolys)
+    @ManyToOne(() => Poly, (poly) => poly.polyclinics)
     @JoinColumn({ name: 'polyId' })
     poly: Poly;
 

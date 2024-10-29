@@ -10,9 +10,9 @@ export class ClinicRepository{
     getOne(id: number){
         return this.clinicRepo.createQueryBuilder("clinic")
         .where("clinic.id = :id", { id })
-        .leftJoinAndSelect("clinic.clinicPolys", "clinicPolys")
-        .leftJoinAndSelect("clinicPolys.poly", "poly")
-        .leftJoinAndSelect("clinicPolys.queues", "queues")
+        .leftJoinAndSelect("clinic.polyclinics", "polyclinics")
+        .leftJoinAndSelect("polyclinics.poly", "poly")
+        .leftJoinAndSelect("polyclinics.queues", "queues")
         .getOne()
     }
 

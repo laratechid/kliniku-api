@@ -1,6 +1,7 @@
 import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne, JoinColumn, DeleteDateColumn, OneToMany, OneToOne } from "typeorm"
-import { ClinicPoly } from "./clinic-poly"
+import { PolyClinic } from "./polyclinic"
 import { QueueStatus } from "../enum/queue";
+import { User } from "./user";
 
 @Entity({ name: "queue" })
 export class Queue {
@@ -28,7 +29,11 @@ export class Queue {
     @DeleteDateColumn({ select: false })
     deletedAt: Date;
 
-    @ManyToOne(() => ClinicPoly, (polyClinic) => polyClinic.queues)
+    @ManyToOne(() => PolyClinic, (polyclinic) => polyclinic.queues)
     @JoinColumn({ name: 'polyClinicId' })
-    polyClinic: ClinicPoly;
+    polyClinic: PolyClinic;
+
+    @ManyToOne(() => User, (user) => user.queue)
+    @JoinColumn({ name: 'userId' })
+    user: User;
 }

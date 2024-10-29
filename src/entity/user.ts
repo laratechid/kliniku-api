@@ -1,4 +1,5 @@
-import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm"
+import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from "typeorm"
+import { Queue } from "./queue";
 
 @Entity({ name: "user" })
 export class User {
@@ -34,4 +35,7 @@ export class User {
 
     @DeleteDateColumn({ select: false })
     deletedAt: Date
+
+    @OneToMany(() => Queue, (queue) => queue.user)
+    queue: Queue[];
 }

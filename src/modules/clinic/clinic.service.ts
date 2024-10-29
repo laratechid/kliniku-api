@@ -9,7 +9,6 @@ export class ClinicService{
     }
 
     async getOne(res: Res, id: number) {
-        // const opt : FindOneOptions<Clinic> = { where: { id } , relations: ["clinicPolys"] }
         const data = await this.clinicRepository.getOne(id)
         if (!data) return response(res, "not found", 400)
         return data

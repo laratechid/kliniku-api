@@ -2,7 +2,7 @@ import { DataSource } from "typeorm";
 import { User } from "../entity/user";
 import { env } from "./env";
 import { Clinic } from "../entity/clinic";
-import { ClinicPoly } from "../entity/clinic-poly";
+import { PolyClinic } from "../entity/polyclinic";
 import { Poly } from "../entity/poly";
 import { Queue } from "../entity/queue";
 
@@ -16,7 +16,7 @@ export const AppDataSource = new DataSource({
     database: env.mysqlDb,
     synchronize: true,
     logging: true,
-    entities: [User, Clinic, ClinicPoly, Poly, Queue]
+    entities: [User, Clinic, PolyClinic, Poly, Queue]
 })
 
 export async function mysqlInit() {
