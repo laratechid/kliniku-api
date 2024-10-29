@@ -14,7 +14,7 @@ export class Queue {
     @Column()
     polyClinicId: number;
 
-    @Column({ type: "enum", enum: QueueStatus, default: QueueStatus.EMPTY })
+    @Column({ type: "enum", enum: QueueStatus, default: QueueStatus.BOOKED })
     status: QueueStatus;
 
     @Column()
