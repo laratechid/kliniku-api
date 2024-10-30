@@ -12,7 +12,14 @@ export class ClinicService {
     async getOne(res: Res, id: number) {
         const data = await this.clinicRepository.getOne(id)
         if (!data) return response(res, "not found", 400)
-        return data
+        const result = 
+            {...data,
+            openSchedule: "08:00 - 21:00",
+            openDays: "Senin - Jumat",
+            address: "Unnamed Road, Sekar Putih, SekarPutih, Bagor, Nganjuk Regency, East Java 64461",
+            distance: "2.4 km",
+            rating: 4.5}
+        return result
     }
 
     async getAll(res: Res, pagination: PaginationDto): Promise<[any[], number]> {
