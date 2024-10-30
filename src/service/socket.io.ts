@@ -1,24 +1,16 @@
+import { FastifyInstance } from "fastify";
 import { Server } from "socket.io"
-import app from "./fastify"
+import { Res } from "../types/fastify";
+import { response } from "../helper/response";
 
-export const SocketIOService = () =>  new Server(app.server)
+let io: Server | null = null;
 
-export function Broadcast(){
-    const io = SocketIOService()
-    io.on('connection', (socket) => {
-        console.log(`User connected: ${socket.id}`);
-      
-        // Listen for 'message' events from client
-        socket.on('message', (msg) => {
-          console.log(`Message from ${socket.id}: ${msg}`);
-      
-          // Broadcast message to all connected clients
-          io.emit('message', msg);
-        });
-      
-        // Handle client disconnect
-        socket.on('disconnect', () => {
-          console.log(`User disconnected: ${socket.id}`);
-        });
-      });
-}
+export const initSocketIO = (httpServer: FastifyInstance) => {
+  io = new Server(httpServer.server);
+  return io;
+};
+
+export const emitEvent = (res: Res, event: string, data: any) => {
+  if (!io) return response(res, "Socket.IO not initialized", 400)
+  io.emit(event, data);
+};
