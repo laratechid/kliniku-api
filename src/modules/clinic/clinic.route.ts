@@ -10,7 +10,7 @@ import { extractPaginate } from "../../helper/pagination"
 
 class ClinicRoute{
     static clinicRepository = new ClinicRepository(AppDataSource)
-    static clinicService = new ClinicService(ClinicRoute.clinicRepository)
+    static clinicService = new ClinicService(this.clinicRepository)
     
     static async getOne(req: Req, res: Res){
         const { id } = req.params as { id: number }

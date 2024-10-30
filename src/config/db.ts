@@ -5,6 +5,7 @@ import { Clinic } from "../entity/clinic";
 import { PolyClinic } from "../entity/polyclinic";
 import { Poly } from "../entity/poly";
 import { Queue } from "../entity/queue";
+import { infoLog } from "../helper/logger";
 
 
 export const AppDataSource = new DataSource({
@@ -21,6 +22,8 @@ export const AppDataSource = new DataSource({
 
 export async function mysqlInit() {
     await AppDataSource.initialize()
-    return AppDataSource.isInitialized
+    const isConnected=  AppDataSource.isInitialized
+    if (!isConnected) process.exit()
+        infoLog(`is database connected ? ${isConnected}`)
 }
 

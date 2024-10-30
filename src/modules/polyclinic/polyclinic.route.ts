@@ -7,7 +7,7 @@ import { PolyClinicService } from "./polyclinic.service";
 
 class PolyClinicRoute{
     static polyClinicRepository = new PolyClinicRepository(AppDataSource)
-    static polyClinicService = new PolyClinicService(PolyClinicRoute.polyClinicRepository)
+    static polyClinicService = new PolyClinicService(this.polyClinicRepository)
     
     static async getDetail(req: Req, res: Res){
         const { id } = req.params as { id: number }
