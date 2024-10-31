@@ -5,7 +5,7 @@ import { Req, Res } from "../../types/fastify";
 import { QueueRepository } from "./queue.repository";
 import { QueueService } from "./queue.service";
 
-export class Controller {
+class Controller {
     private static queueService = new QueueService(
         new QueueRepository(
             AppDataSource
