@@ -3,8 +3,7 @@ import { AuthService } from "./auth.service";
 import { UserRepository } from "../user/user.repository";
 import { AppDataSource } from "../../config/db";
 
-const userRepository = new UserRepository(AppDataSource)
-const authService = new AuthService(userRepository)
+const authService = new AuthService(new UserRepository(AppDataSource))
 export function authRoutes(route: FastifyInstance){
     route.get("", (req, res) => authService.googleAuth(req,res))
     route.get("/callback", (req, res) => authService.googleAuthCallback(req,res))

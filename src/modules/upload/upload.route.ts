@@ -3,7 +3,7 @@ import { Req, Res } from "../../types/fastify";
 import { UploadService } from "./upload.service";
 import { response } from "../../helper/response";
 
-class UploadRoute {
+class Controller {
     static async upload(req: Req, res: Res) {
         const file = await req.file()
         const buffer = await file.toBuffer()
@@ -20,5 +20,5 @@ class UploadRoute {
 }
 
 export function uploadRoutes(route: FastifyInstance) {
-    route.post("/", async (req: Req, res: Res) => await UploadRoute.upload(req, res))
+    route.post("/", async (req: Req, res: Res) => await Controller.upload(req, res))
 }

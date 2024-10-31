@@ -5,9 +5,8 @@ import { AppDataSource } from "../../config/db";
 import { UserService } from "./user.service";
 import { response } from "../../helper/response";
 
-class UserRoute {
-    static userRepository = new UserRepository(AppDataSource)
-    static userService = new UserService(UserRoute.userRepository)
+class Controller {
+    private static userService = new UserService(new UserRepository(AppDataSource))
 
     static async getUser(req: Req, res: Res){
         const { id } = req.params as { id: number }
@@ -16,5 +15,5 @@ class UserRoute {
     }
 }
 export function userRoutes(route: FastifyInstance){
-    route.get("/:id", (req, res) => UserRoute.getUser(req, res))
+    route.get("/:id", (req, res) => Controller.getUser(req, res))
 }
