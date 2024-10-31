@@ -12,6 +12,7 @@ import { initSocketIO } from './service/socket.io'
 import fastifyMultipart from '@fastify/multipart';
 import fastify from 'fastify'
 import { uploadRoutes } from './modules/upload/upload.route'
+import { queueRoutes } from './modules/queue/queue.route'
 
 async function bootstrap() {
     await mysqlInit()
@@ -21,10 +22,11 @@ async function bootstrap() {
     app.get("/", (_, res: Res) => response(res, 'ok'))
     app.register(cookie)
     app.register(fastifyMultipart)
-    app.register(uploadRoutes, { prefix: "/upload" })
     app.register(userRoutes, { prefix: "/user" })
-    app.register(authRoutes, { prefix: "/auth/google" })
+    app.register(queueRoutes, { prefix: "/queue" })
     app.register(clinicRoutes, { prefix: "/clinic" })
+    app.register(uploadRoutes, { prefix: "/upload" })
+    app.register(authRoutes, { prefix: "/auth/google" })
     app.register(polyClinicRoutes, { prefix: "/polyclinic" })
     app.listen({ port: env.appPort }, () => successLog(`app running on port: ${env.appPort}`))
 }
