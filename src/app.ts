@@ -9,14 +9,19 @@ import cookie from '@fastify/cookie'
 import { clinicRoutes } from './modules/clinic/clinic.route'
 import { polyClinicRoutes } from './modules/polyclinic/polyclinic.route'
 import { initSocketIO } from './service/socket.io'
+import fastifyMultipart from '@fastify/multipart';
 import fastify from 'fastify'
+import { uploadRoutes } from './modules/upload/upload.route'
 
 async function bootstrap() {
     await mysqlInit()
     const app = fastify({ logger: true })
     initSocketIO(app)
+
     app.get("/", (_, res: Res) => response(res, 'ok'))
     app.register(cookie)
+    app.register(fastifyMultipart)
+    app.register(uploadRoutes, { prefix: "/upload" })
     app.register(userRoutes, { prefix: "/user" })
     app.register(authRoutes, { prefix: "/auth/google" })
     app.register(clinicRoutes, { prefix: "/clinic" })

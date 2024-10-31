@@ -2,7 +2,7 @@ import { configDotenv } from "dotenv"
 configDotenv()
 
 export const env = {
-    appPort : +process.env.APP_PORT,
+    appPort: +process.env.APP_PORT,
 
     mysqlHost: process.env.MYSQL_HOST,
     mysqlDb: process.env.MYSQL_DB,
@@ -11,8 +11,14 @@ export const env = {
     mysqlPass: process.env.MYSQL_PASS,
 
     jwtSecret: process.env.JWT_SECRET,
-    
+
     googleOauthClientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
     googleOauthClientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-    googleOauthRedirectUrl: process.env.GOOGLE_OAUTH_REDIRECT_URL
+    googleOauthRedirectUrl: process.env.GOOGLE_OAUTH_REDIRECT_URL,
+
+    cflareAccountID: process.env.CLOUDFLARE_ACCOUNT_ID,
+    cflareAccessKey: process.env.CLOUDFLARE_ACCESS_KEY,
+    cflareSecretKey: process.env.CLOUDFLARE_SECRET_KEY,
+    cflareR2Bucket: process.env.CLOUDFLARE_R2_BUCKET,
+    cflareR2Url: process.env.CLOUDFLARE_R2_URL,
 }
