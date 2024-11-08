@@ -1,6 +1,6 @@
-import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, OneToMany, DeleteDateColumn, JoinColumn } from "typeorm"
+import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, OneToMany, DeleteDateColumn } from "typeorm"
 import { PolyClinic } from "./polyclinic";
-import { IsNumber, IsNumberString, IsPhoneNumber, IsString } from "class-validator";
+import { ClinicSchedule } from "./schedule";
 
 @Entity({ name: "clinic" })
 export class Clinic {
@@ -48,5 +48,8 @@ export class Clinic {
 
     @OneToMany(() => PolyClinic, (polyclinic) => polyclinic.clinic)
     ratings: PolyClinic[];
+
+    @OneToMany(() => ClinicSchedule, (schedule) => schedule.clinic)
+    schedules: ClinicSchedule[];
 
 }
