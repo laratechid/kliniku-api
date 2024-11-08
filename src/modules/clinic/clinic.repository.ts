@@ -24,4 +24,8 @@ export class ClinicRepository{
         .skip(skip)
         .getManyAndCount()
     }
+
+    updateRating(clinicId: number, rating: number){
+        return this.clinicRepo.update(clinicId, { rating })
+    }
 }

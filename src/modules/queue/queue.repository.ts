@@ -31,9 +31,15 @@ export class QueueRepository {
             .getOne()
     }
 
-    getLatestQueue(polyClinicId: number){
+    getLatestQueue(polyClinicId: number) {
         const startDate = dayjs().startOf("day").toDate()
         const endDate = dayjs().endOf("day").toDate()
-        return this.queueRepo.findOne({ where: { polyClinicId, createdAt: Between(startDate, endDate) }, order: { sequence: "DESC" } })
+        return this.queueRepo.findOne({
+            where: {
+                polyClinicId,
+                createdAt: Between(startDate, endDate)
+            },
+            order: { sequence: "DESC" }
+        })
     }
 }

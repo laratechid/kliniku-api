@@ -1,6 +1,6 @@
 import { Res } from "../../types/fastify";
 import { ClinicRepository } from "./clinic.repository";
-import { response, responsePaginate } from "../../helper/response";
+import { response } from "../../helper/response";
 import { PaginationDto } from "../../dto/pagination.dto";
 
 export class ClinicService {
@@ -16,13 +16,12 @@ export class ClinicService {
             {...data,
             openSchedule: "08:00 - 21:00",
             openDays: "Senin - Jumat",
-            address: "Unnamed Road, Sekar Putih, SekarPutih, Bagor, Nganjuk Regency, East Java 64461",
-            distance: "2.4 km",
-            rating: 4.5}
+            distance: "2.4 km"
+        }
         return result
     }
 
-    async getAll(res: Res, pagination: PaginationDto): Promise<[any[], number]> {
+    async getAll(_: Res, pagination: PaginationDto): Promise<[any[], number]> {
         const [data, count] = await this.clinicRepository.getAll(pagination)
         const polyclinics: string[] = []
         data.forEach(data => data.polyclinics

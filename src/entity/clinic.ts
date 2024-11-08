@@ -1,5 +1,6 @@
 import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, OneToMany, DeleteDateColumn, JoinColumn } from "typeorm"
 import { PolyClinic } from "./polyclinic";
+import { IsNumber, IsNumberString, IsPhoneNumber, IsString } from "class-validator";
 
 @Entity({ name: "clinic" })
 export class Clinic {
@@ -24,6 +25,15 @@ export class Clinic {
     @Column({ type: "json" })
     paymentSupports: string[];
 
+    @Column({ nullable: true })
+    phone: string
+
+    @Column({ nullable: false })
+    adress: string
+
+    @Column({ type: "float", nullable: true })
+    rating: number
+
     @CreateDateColumn({ select: false })
     createdAt: Date;
 
@@ -35,17 +45,8 @@ export class Clinic {
 
     @OneToMany(() => PolyClinic, (polyclinic) => polyclinic.clinic)
     polyclinics: PolyClinic[];
-}
 
-// export interface Clinic {
-//     id: string;
-//     name: string;
-//     polyclinics: PolyClinic[];
-//     images: string[];
-//     distance: string;
-//     rating: number;
-//     isVerified: boolean;
-//     openSchedule: string;
-//     openDays: string;
-//     paymentSupports: string[]
-//   }
+    @OneToMany(() => PolyClinic, (polyclinic) => polyclinic.clinic)
+    ratings: PolyClinic[];
+
+}

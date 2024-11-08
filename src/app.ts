@@ -12,6 +12,7 @@ import fastify from 'fastify'
 import { uploadRoutes } from './modules/upload/upload.route'
 import { queueRoutes } from './modules/queue/queue.route'
 import { rootRoutes } from './modules/_root/root.route'
+import { reviewRoutes } from './modules/review/review.route'
 
 async function bootstrap() {
     await mysqlInit()
@@ -27,6 +28,7 @@ async function bootstrap() {
     app.register(uploadRoutes, { prefix: "/upload" })
     app.register(authRoutes, { prefix: "/auth/google" })
     app.register(polyClinicRoutes, { prefix: "/polyclinic" })
+    app.register(reviewRoutes, { prefix: "/review" })
     app.listen({ port: env.appPort }, () => successLog(`app running on port: ${env.appPort}`))
 }
 
