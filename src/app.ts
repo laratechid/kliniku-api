@@ -15,33 +15,17 @@ import { rootRoutes } from './modules/_root/root.route'
 import { reviewRoutes } from './modules/review/review.route'
 import swagger from "@fastify/swagger"
 import swaggerUI from '@fastify/swagger-ui'
+import { swaggerConfig } from './config/swagger'
 
 async function bootstrap() {
     await mysqlInit()
     const app = fastify({ logger: true })
     initSocketIO(app)
 
-    app.register(swagger, {
-        swagger: {
-            info: {
-                title: 'KliniKu API Documentation',
-                version: '1.0.0'
-            },
-            consumes: ['application/json'],
-            produces: ['application/json']
-        }
-    })
-
-    app.register(swaggerUI, {
-        routePrefix: '/docs',
-        // swaggerOptions: {
-        //     url: '/swagger.json'
-        // },
-        // staticCSP: true,
-    })
-
     app.register(cookie)
     app.register(fastifyMultipart)
+    app.register(swagger, { ...swaggerConfig })
+    app.register(swaggerUI, { routePrefix: '/docs' })
     app.register(rootRoutes, { prefix: "/" })
     app.register(userRoutes, { prefix: "/user" })
     app.register(queueRoutes, { prefix: "/queue" })
