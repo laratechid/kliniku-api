@@ -20,6 +20,7 @@ export class ClinicRepository{
     getAll({ limit, skip }: PaginationDto){
         return this.clinicRepo.createQueryBuilder("clinic")
         .leftJoinAndSelect("clinic.polyclinics", "polyclinics")
+        .leftJoinAndSelect("clinic.schedules", "schedules")
         .leftJoinAndSelect("polyclinics.poly", "poly")
         .take(limit)
         .skip(skip)
