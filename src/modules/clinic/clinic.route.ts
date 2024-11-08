@@ -7,6 +7,7 @@ import { response, responsePaginate } from "../../helper/response"
 import { PaginationDto } from "../../dto/pagination.dto"
 import { validation } from "../../helper/validation"
 import { extractPaginate } from "../../helper/pagination"
+import { clinicSchema } from "./clinic.schema"
 
 class Controller {
     private static clinicService = new ClinicService(
@@ -34,6 +35,6 @@ class Controller {
 }
 
 export function clinicRoutes(router: FastifyInstance) {
-    router.get("/:id", (req, res) => Controller.getOne(req, res)),
-        router.get("/", (req, res) => Controller.getAll(req, res))
+    router.get("/:id", { schema: clinicSchema.getOne },(req, res) => Controller.getOne(req, res)),
+        router.get("", { schema: clinicSchema.getAll },(req, res) => Controller.getAll(req, res))
 }

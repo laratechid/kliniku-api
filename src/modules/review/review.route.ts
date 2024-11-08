@@ -7,14 +7,15 @@ import { Req, Res } from "../../types/fastify";
 import { ReviewRepository } from "./review.repository";
 import { ReviewService } from "./review.service";
 import { ClinicRepository } from "../clinic/clinic.repository";
+import { reviewSchema } from "./review.schema";
 
-class Controller{
+class Controller {
     private static reviewService = new ReviewService(
         new ReviewRepository(AppDataSource),
         new ClinicRepository(AppDataSource)
     )
 
-    static async create(req: Req, res: Res){
+    static async create(req: Req, res: Res) {
         const dto = new ReviewDto()
         const dataValue = Object.assign(dto, req.body)
         const { valid, msg } = await validation(dataValue)
@@ -24,6 +25,6 @@ class Controller{
     }
 }
 
-export function reviewRoutes(route: FastifyInstance){
-    route.post("/", (req, res) => Controller.create(req, res))
+export function reviewRoutes(route: FastifyInstance) {
+    route.post("", { schema: reviewSchema.create }, (req, res) => Controller.create(req, res))
 }

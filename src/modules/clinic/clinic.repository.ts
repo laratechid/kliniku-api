@@ -28,4 +28,8 @@ export class ClinicRepository{
     updateRating(clinicId: number, rating: number){
         return this.clinicRepo.update(clinicId, { rating })
     }
+
+    isClinicExist(id: number){
+        return this.clinicRepo.existsBy({ id })
+    }
 }

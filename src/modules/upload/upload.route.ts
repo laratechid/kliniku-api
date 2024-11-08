@@ -20,5 +20,9 @@ class Controller {
 }
 
 export function uploadRoutes(route: FastifyInstance) {
-    route.post("/", async (req: Req, res: Res) => await Controller.upload(req, res))
+    route.post("", {
+        schema: {
+            tags: ["Upload Files"]
+        }
+    }, async (req: Req, res: Res) => await Controller.upload(req, res))
 }

@@ -15,6 +15,5 @@ export class ReviewDto{
 
     @IsOptional()
     @IsArray()
-    @IsString()
     reaction: string[]
 }

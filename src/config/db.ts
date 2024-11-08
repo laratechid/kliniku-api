@@ -16,7 +16,7 @@ export const AppDataSource = new DataSource({
     username: env.mysqlUser,
     password: env.mysqlPass,
     database: env.mysqlDb,
-    synchronize: true,
+    synchronize: false,
     logging: false,
     entities: [User, Clinic, PolyClinic, Poly, Queue, Review]
 })
