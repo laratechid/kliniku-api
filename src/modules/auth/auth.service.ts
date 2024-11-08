@@ -4,7 +4,6 @@ import { OauthClient } from "../../config/google";
 import { GoogleAuthCallback, GoogleAuthUserInfo } from "../../interface/google";
 import { google } from "googleapis";
 import { UserRepository } from "../user/user.repository";
-import { generateToken } from "../../helper/jwt";
 import { User } from "../../entity/user";
 import { successLog } from "../../helper/logger";
 
@@ -35,33 +34,30 @@ export class AuthService {
             version: "v2"
         }).userinfo.get()
         const gToken: string = tokens.access_token
-        const fetchUser = await this.userRepo.fetchUser({ email: data.email })
+        const fetchUser = await this.userRepo.fetchUser({ identifier: data.id })
         if (fetchUser) {
-            const { id, email } = fetchUser
-            const userToken = generateToken({ id, email })
             const user = data as object as GoogleAuthUserInfo
             successLog(user)
-            res.setCookie("gToken", gToken, { path: "/" })
-            res.setCookie("userToken", userToken, { path: "/" })
-            return response(res, { gToken, userToken })
+            res.setCookie("oauthSecret", gToken, { path: "/" })
+            return response(res, gToken)
         } else {
-            const entity = new User()
-            entity.email = data.email;
-            entity.name = data.name;
-            const newUser = await this.userRepo.createUser(entity)
-            const { id, email } = newUser
-            const userToken = generateToken({ id, email })
+            const e = new User()
+            e.email = data.email;
+            e.name = data.name;
+            e.identifier = data.id
+            await this.userRepo.createUser(e)
             const user = data as object as GoogleAuthUserInfo
             successLog(user)
-            res.setCookie("gToken", gToken)
-            res.setCookie("userToken", userToken, { path: "/" })
-            return response(res, { gToken, userToken })
+            res.setCookie("oauthSecret", gToken)
+            return response(res, gToken)
         }
     }
 
-    async googleAuthRevoke(_: Req, res: Res) {
+    async googleAuthRevoke(req: Req, res: Res) {
         try {
-            await OauthClient.revokeCredentials()
+            const token = req.cookies["oauthSecret"]
+            await OauthClient.revokeToken(token)
+            res.clearCookie("oauthSecret")
             return response(res, "logout")
         } catch (error) {
             return response(res, "revoke failed", 400)
@@ -69,7 +65,7 @@ export class AuthService {
     }
 
     async googleTokenInfo(req: Req, res: Res) {
-        const token = req.cookies["gToken"]
+        const token = req.cookies["oauthSecret"]
         const info = await OauthClient.getTokenInfo(token)
         return response(res, info)
     }
