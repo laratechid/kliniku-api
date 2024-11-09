@@ -5,6 +5,7 @@ import { Req, Res } from "../../types/fastify";
 import { PolyClinicRepository } from "./polyclinic.repository";
 import { PolyClinicService } from "./polyclinic.service";
 import { polyClinicSchema } from "./polyclinic.schema";
+import { middleware } from "../../middleware/middleware";
 
 class Controller {
     private static polyClinicService = new PolyClinicService(
@@ -20,5 +21,6 @@ class Controller {
 }
 
 export function polyClinicRoutes(route: FastifyInstance) {
+    route.addHook("preHandler", middleware)
     route.get("/:id", { schema: polyClinicSchema.getOne },(req, res) => Controller.getDetail(req, res))
 }

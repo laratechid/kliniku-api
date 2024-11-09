@@ -8,6 +8,7 @@ import { ReviewRepository } from "./review.repository";
 import { ReviewService } from "./review.service";
 import { ClinicRepository } from "../clinic/clinic.repository";
 import { reviewSchema } from "./review.schema";
+import { middleware } from "../../middleware/middleware";
 
 class Controller {
     private static reviewService = new ReviewService(
@@ -26,5 +27,6 @@ class Controller {
 }
 
 export function reviewRoutes(route: FastifyInstance) {
+    route.addHook("preHandler", middleware)
     route.post("", { schema: reviewSchema.create }, (req, res) => Controller.create(req, res))
 }

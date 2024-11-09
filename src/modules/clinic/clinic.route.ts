@@ -8,6 +8,7 @@ import { PaginationDto } from "../../dto/pagination.dto"
 import { validation } from "../../helper/validation"
 import { extractPaginate } from "../../helper/pagination"
 import { clinicSchema } from "./clinic.schema"
+import { middleware } from "../../middleware/middleware"
 
 class Controller {
     private static clinicService = new ClinicService(
@@ -34,7 +35,8 @@ class Controller {
     }
 }
 
-export function clinicRoutes(router: FastifyInstance) {
-    router.get("/:id", { schema: clinicSchema.getOne },(req, res) => Controller.getOne(req, res)),
-        router.get("", { schema: clinicSchema.getAll },(req, res) => Controller.getAll(req, res))
+export function clinicRoutes(route: FastifyInstance) {
+    route.addHook("preHandler", middleware)
+    route.get("/:id", { schema: clinicSchema.getOne }, (req, res) => Controller.getOne(req, res)),
+        route.get("", { schema: clinicSchema.getAll }, (req, res) => Controller.getAll(req, res))
 }

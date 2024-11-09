@@ -2,6 +2,7 @@ import { FastifyInstance } from "fastify";
 import { Req, Res } from "../../types/fastify";
 import { UploadService } from "./upload.service";
 import { response } from "../../helper/response";
+import { middleware } from "../../middleware/middleware";
 
 class Controller {
     static async upload(req: Req, res: Res) {
@@ -20,6 +21,7 @@ class Controller {
 }
 
 export function uploadRoutes(route: FastifyInstance) {
+    route.addHook("preHandler", middleware)
     route.post("", {
         schema: {
             tags: ["Upload Files"]

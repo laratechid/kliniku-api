@@ -1,7 +1,6 @@
 import { env } from './config/env'
 import { mysqlInit } from './config/db'
 import { successLog } from './helper/logger'
-import { userRoutes } from './modules/user/user.route'
 import { authRoutes } from './modules/auth/auth.route'
 import cookie from '@fastify/cookie'
 import { clinicRoutes } from './modules/clinic/clinic.route'
@@ -27,7 +26,7 @@ async function bootstrap() {
     app.register(swagger, { ...swaggerConfig })
     app.register(swaggerUI, { routePrefix: '/docs' })
     app.register(rootRoutes, { prefix: "/" })
-    app.register(userRoutes, { prefix: "/user" })
+    // app.register(userRoutes, { prefix: "/user" })
     app.register(queueRoutes, { prefix: "/queue" })
     app.register(clinicRoutes, { prefix: "/clinic" })
     app.register(uploadRoutes, { prefix: "/upload" })

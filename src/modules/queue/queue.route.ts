@@ -9,6 +9,7 @@ import { validation } from "../../helper/validation";
 import { PolyClinicService } from "../polyclinic/polyclinic.service";
 import { PolyClinicRepository } from "../polyclinic/polyclinic.repository";
 import { queueSchema } from "./queue.schema";
+import { middleware } from "../../middleware/middleware";
 
 class Controller {
     private static queueService = new QueueService(
@@ -48,7 +49,8 @@ class Controller {
 }
 
 export function queueRoutes(route: FastifyInstance) {
-    route.post("", { schema :queueSchema.create }, (req, res) => Controller.create(req, res)),
-        route.patch("/:id", { schema :queueSchema.update }, (req, res) => Controller.update(req, res)),
+    route.addHook("preHandler", middleware)
+    route.post("", { schema: queueSchema.create }, (req, res) => Controller.create(req, res)),
+        route.patch("/:id", { schema: queueSchema.update }, (req, res) => Controller.update(req, res)),
         route.get("/:id", { schema: queueSchema.getOne }, (req, res) => Controller.getOne(req, res))
 }
