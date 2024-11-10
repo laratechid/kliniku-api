@@ -33,13 +33,15 @@ export class AuthService {
             auth: OauthClient,
             version: "v2"
         }).userinfo.get()
-        const gToken: string = tokens.access_token
+        const token: string = tokens.id_token
+        const accessToken: string = tokens.access_token
         const fetchUser = await this.userRepo.fetchUser({ identifier: data.id })
         if (fetchUser) {
             const user = data as object as GoogleAuthUserInfo
             successLog(user)
-            res.setCookie("oauthSecret", gToken, { path: "/" })
-            return response(res, gToken)
+            res.setCookie("token", token)
+            res.setCookie("access_token", accessToken)
+            return response(res, token)
         } else {
             const e = new User()
             e.email = data.email;
@@ -48,16 +50,18 @@ export class AuthService {
             await this.userRepo.createUser(e)
             const user = data as object as GoogleAuthUserInfo
             successLog(user)
-            res.setCookie("oauthSecret", gToken)
-            return response(res, gToken)
+            res.setCookie("token", token)
+            res.setCookie("access_token", accessToken)
+            return response(res, token)
         }
     }
 
     async googleAuthRevoke(req: Req, res: Res) {
         try {
-            const token = req.cookies["oauthSecret"]
-            await OauthClient.revokeToken(token)
-            res.clearCookie("oauthSecret")
+            const accessToken = req.cookies["access_token"]
+            await OauthClient.revokeToken(accessToken)
+            res.clearCookie("token")
+            res.clearCookie("access_token")
             return response(res, "logout")
         } catch (error) {
             return response(res, "revoke failed", 400)
@@ -65,7 +69,7 @@ export class AuthService {
     }
 
     async googleTokenInfo(req: Req, res: Res) {
-        const token = req.cookies["oauthSecret"]
+        const token = req.cookies["access_token"]
         const info = await OauthClient.getTokenInfo(token)
         return response(res, info)
     }
