@@ -1,11 +1,11 @@
 export enum Day {
-    Minggu = "Minggu",
     Senin = "Senin",
     Selasa = "Selasa",
     Rabu = "Rabu",
     Kamis = "Kamis",
     Jumat = "Jumat",
-    Sabtu = "Sabtu"
+    Sabtu = "Sabtu",
+    Minggu = "Minggu"
 }
 
 export enum DaysCode {

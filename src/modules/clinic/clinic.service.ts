@@ -4,6 +4,7 @@ import { response } from "../../helper/response";
 import { PaginationDto } from "../../dto/pagination.dto";
 import dayjs from "dayjs";
 import { translateDayCode } from "../../helper/time";
+import { sortClinicSchedules } from "../../helper/sort";
 
 export class ClinicService {
     private clinicRepository: ClinicRepository
@@ -16,16 +17,15 @@ export class ClinicService {
         if (!data) return response(res, "not found", 400)
         const currentDayCode = dayjs().day()
         const today = translateDayCode(currentDayCode)
-
         const schedules = data.schedules.map(res =>({
             ...res,
             isToday: today == res.day
         }))
-
+        const sortSchedules = sortClinicSchedules(schedules)
         const result =
         {
             ...data,
-            schedules,
+            schedules: sortSchedules,
             distance: "2.4 km"
         }
         return result
