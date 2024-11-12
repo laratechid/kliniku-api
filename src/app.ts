@@ -1,19 +1,19 @@
+import fastify from 'fastify'
+import fastifyMultipart from '@fastify/multipart';
+import cookie from '@fastify/cookie'
+import swagger from "@fastify/swagger"
+import swaggerUI from '@fastify/swagger-ui'
 import { env } from './config/env'
 import { mysqlInit } from './config/db'
 import { successLog } from './helper/logger'
 import { authRoutes } from './modules/auth/auth.route'
-import cookie from '@fastify/cookie'
 import { clinicRoutes } from './modules/clinic/clinic.route'
 import { polyClinicRoutes } from './modules/polyclinic/polyclinic.route'
 import { initSocketIO } from './service/socket.io'
-import fastifyMultipart from '@fastify/multipart';
-import fastify from 'fastify'
 import { uploadRoutes } from './modules/upload/upload.route'
 import { queueRoutes } from './modules/queue/queue.route'
 import { rootRoutes } from './modules/_root/root.route'
 import { reviewRoutes } from './modules/review/review.route'
-import swagger from "@fastify/swagger"
-import swaggerUI from '@fastify/swagger-ui'
 import { swaggerConfig } from './config/swagger'
 
 async function bootstrap() {

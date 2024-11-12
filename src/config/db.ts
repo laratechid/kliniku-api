@@ -8,6 +8,7 @@ import { Queue } from "../entity/queue";
 import { infoLog } from "../helper/logger";
 import { Review } from "../entity/review";
 import { ClinicSchedule } from "../entity/schedule";
+import { AppSetting } from "../entity/app-setting";
 
 
 export const AppDataSource = new DataSource({
@@ -19,7 +20,7 @@ export const AppDataSource = new DataSource({
     database: env.mysqlDb,
     synchronize: true,
     logging: false,
-    entities: [User, Clinic, PolyClinic, Poly, Queue, Review, ClinicSchedule]
+    entities: [User, Clinic, PolyClinic, Poly, Queue, Review, ClinicSchedule, AppSetting]
 })
 
 export async function mysqlInit() {

@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { polyEvent } from "../../const/event";
 import { Queue } from "../../entity/queue";
 import { QueueStatus } from "../../enum/queue";
@@ -14,6 +15,7 @@ export class PolyClinicService{
 
     async getDetail(res: Res, id: number){
         const data = await this.polyClinicRepo.getDetail(id)
+        if(!data) return response(res, "not found", 400)
         const { queues } = data
         const totalQueue = (queues.length + 1)
         for (let index = totalQueue ; index < totalQueue + 15 ; index++) {
@@ -22,8 +24,9 @@ export class PolyClinicService{
             queue.sequence = index
             queues.push(queue)
         }
-        if(!data) return response(res, "not found", 400)
-        emitEvent(res, polyEvent(id), data)
-        return data
+        const totalRegistrant = _.size(_.filter(queues, item => item.status !== "EMPTY" as QueueStatus));
+        const result = {...data, totalRegistrant}
+        emitEvent(res, polyEvent(id), result)
+        return result
     }
 }
