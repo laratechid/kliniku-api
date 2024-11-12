@@ -16,6 +16,8 @@ export const env = {
     googleOauthClientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
     googleOauthRedirectUrl: process.env.GOOGLE_OAUTH_REDIRECT_URL,
 
+    googleOauthAndroidClientID: process.env.GOOGLE_OAUTH_ANDROID_CLIENT_ID,
+
     cflareAccountID: process.env.CLOUDFLARE_ACCOUNT_ID,
     cflareAccessKey: process.env.CLOUDFLARE_ACCESS_KEY,
     cflareSecretKey: process.env.CLOUDFLARE_SECRET_KEY,
