@@ -22,4 +22,12 @@ export class PolyClinicRepository{
         .where("polyClinic.id = :id", { id })
         .getOne()
     }
+
+    fetchOne(id: number){
+        return this.polyClinicRepo.createQueryBuilder("polyClinic")
+        .where("polyClinic.id = :id", { id })
+        .leftJoinAndSelect("polyClinic.clinic", "clinic")
+        .leftJoinAndSelect("polyClinic.poly", "poly")
+        .getOne()
+    }
 }

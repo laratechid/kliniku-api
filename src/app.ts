@@ -15,6 +15,7 @@ import { queueRoutes } from './modules/queue/queue.route'
 import { rootRoutes } from './modules/_root/root.route'
 import { reviewRoutes } from './modules/review/review.route'
 import { swaggerConfig } from './config/swagger'
+import { bookRoutes } from './modules/book/book.route';
 
 async function bootstrap() {
     await mysqlInit()
@@ -28,6 +29,7 @@ async function bootstrap() {
     app.register(rootRoutes, { prefix: "/" })
     // app.register(userRoutes, { prefix: "/user" })
     app.register(queueRoutes, { prefix: "/queue" })
+    app.register(bookRoutes, { prefix: "/book" })
     app.register(clinicRoutes, { prefix: "/clinic" })
     app.register(uploadRoutes, { prefix: "/upload" })
     app.register(authRoutes, { prefix: "/auth/google" })

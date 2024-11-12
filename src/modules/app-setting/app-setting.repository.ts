@@ -1,5 +1,6 @@
 import { DataSource, Repository } from "typeorm";
 import { AppSetting } from "../../entity/app-setting";
+import { AppSettingKey } from "../../enum/app-setting";
 
 export class AppSettingRepository{
     private appSettingRepo: Repository<AppSetting>
@@ -7,7 +8,7 @@ export class AppSettingRepository{
         this.appSettingRepo = db.getRepository(AppSetting)
     }
 
-    fetchOneByKey(key: string){
+    fetchOneByKey(key: AppSettingKey){
         return this.appSettingRepo.findOne({ where: { key } })
     }
 }
