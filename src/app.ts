@@ -35,7 +35,8 @@ async function bootstrap() {
     app.register(authRoutes, { prefix: "/auth/google" })
     app.register(polyClinicRoutes, { prefix: "/polyclinic" })
     app.register(reviewRoutes, { prefix: "/review" })
-    app.listen({ port: env.appPort }, () => successLog(`app running on port: ${env.appPort}`))
+    app.listen({ port: env.appPort },
+    () => successLog(`app running on port: ${env.appPort}`))
 }
 
 bootstrap()
