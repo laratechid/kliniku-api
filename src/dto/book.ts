@@ -8,5 +8,13 @@ export class BookSummaryRequestDto{
 
     @IsNumber()
     @Type(()=> Number)
-    polyclinicId: number
+    polyClinicId: number
+}
+
+export class BookQueueDto {
+    @IsNumber()
+    polyClinicId: number;
+
+    @IsNumber()
+    sequence: number;
 }

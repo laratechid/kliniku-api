@@ -5,8 +5,3 @@ export class UpdateQueueDto {
     @IsEnum(QueueStatus)
     status?: QueueStatus;
 }
-
-export class CreateQueueDto {
-    @IsNumber()
-    polyClinicId: number;
-}

@@ -1,6 +1,5 @@
-import { Between, DataSource, Repository } from "typeorm";
+import { Between, DataSource, FindOneOptions, Repository } from "typeorm";
 import { Queue } from "../../entity/queue";
-import { QueueStatus } from "../../enum/queue";
 import { UpdateQueueDto } from "../../dto/queue.dto";
 import dayjs from "dayjs";
 
@@ -10,8 +9,12 @@ export class QueueRepository {
         this.queueRepo = db.getRepository(Queue)
     }
 
-    fetchOne(id: number, status: QueueStatus) {
-        return this.queueRepo.findOne({ where: { id, status } })
+    fetchOne(dto : FindOneOptions<Queue>) {
+        return this.queueRepo.findOne(dto)
+    }
+
+    isExist(dto : FindOneOptions<Queue>) {
+        return this.queueRepo.exists(dto)
     }
 
     create(entity: Queue) {
