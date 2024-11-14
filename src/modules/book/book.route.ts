@@ -10,6 +10,7 @@ import { BookService } from "./book.service";
 import { bookSchema } from "./book.schema";
 import { QueueRepository } from "../queue/queue.repository";
 import { PolyClinicService } from "../polyclinic/polyclinic.service";
+import { middleware } from "../../middleware/middleware";
 
 class Controller {
     private static bookService = new BookService(
@@ -39,6 +40,7 @@ class Controller {
 }
 
 export function bookRoutes(route: FastifyInstance){
+    route.addHook("preHandler", middleware)
     route.get("/summary", { schema: bookSchema.bookSummary }, (req, res)=> Controller.bookSummary(req, res))
     route.post("/queue", { schema: bookSchema.bookQueue }, (req, res)=> Controller.bookQueue(req, res))
 }
