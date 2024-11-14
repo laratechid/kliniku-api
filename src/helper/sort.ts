@@ -7,11 +7,8 @@ export function sortClinicSchedules(schedules: { day: Day }[]) {
 }
 
 export function getMissingSequence(sequences: number[]): number[] {
-    let min: number = 1
-    if (sequences.length == 1) {
-        min = Math.min(1)
-    } else min = Math.min(...sequences);
 
+    const min = sequences.length === 1 ? 1 : Math.min(...sequences);
     const max = Math.max(...sequences);
 
     const missingSequence = [];

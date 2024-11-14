@@ -21,7 +21,7 @@ export class PolyClinicService {
 
         if (queues.length > 0) {
             const sequenceCollections: number[] = []
-            queues.forEach(res => sequenceCollections.push(res.sequence))
+            queues.forEach(({ sequence }) => sequenceCollections.push(sequence))
             const missingSequence = getMissingSequence(sequenceCollections)
             missingSequence.forEach(res => {
                 const queue = new Queue() 
@@ -31,7 +31,13 @@ export class PolyClinicService {
             })
             queues = _.sortBy(queues, 'sequence');
         }
-
+        const totalQ = queues.length
+        for (let i = (totalQ + 1); i <= (totalQ + 10); i++) {
+            const queue = new Queue() 
+            queue.status = "EMPTY" as QueueStatus
+            queue.sequence = i
+            queues.push(queue)
+        }
         const totalRegistrant = _.size(_.filter(queues, item => item.status !== "EMPTY" as QueueStatus));
         const result = { ...data, queues, totalRegistrant }
         emitEvent(res, polyEvent(id), result)
