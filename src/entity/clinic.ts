@@ -34,6 +34,12 @@ export class Clinic {
     @Column({ type: "float", nullable: true })
     rating: number
 
+    @Column({ nullable: false })
+    imageProfile: string
+
+    @Column({ nullable: true })
+    vision: string
+
     @CreateDateColumn({ select: false })
     createdAt: Date;
 
