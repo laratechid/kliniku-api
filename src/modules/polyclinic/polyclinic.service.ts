@@ -16,7 +16,7 @@ export class PolyClinicService {
 
     async getDetail(res: Res, id: number) {
         const data = await this.polyClinicRepo.getDetail(id)
-        if (!data) return response(res, "not found", 400)
+        if (!data) response(res, "not found", 400)
         let { queues } = data
 
         if (queues.length > 0) {

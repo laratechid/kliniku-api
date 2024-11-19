@@ -14,13 +14,13 @@ export class QueueService{
 
     async getOne(res: Res, id: number){
         const data = await this.queueRepo.fetchOne({ where: { id } })
-        if(!data) return response(res, "not found")
+        if(!data) response(res, "not found")
         return data
     }
 
     async update(res: Res, dto: UpdateQueueDto, queueId: number){
         const fetch = await this.queueRepo.getOne(queueId)
-        if(!fetch) return response(res, "not found")
+        if(!fetch) response(res, "not found")
         const data = await this.queueRepo.update(queueId, dto)
         await this.poliClinicService.getDetail(res, fetch.polyClinicId)
         return data

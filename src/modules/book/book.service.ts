@@ -29,7 +29,7 @@ export class BookService {
             this.appSettingRepo.fetchOneByKey(AppSettingKey.PLATFORM_FEE)
         ]);
         if (!bookingFee || !platformFee) {
-            return response(res, "fee not found")
+            response(res, "fee not found")
         }
         const grandTotal = +bookingFee + +platformFee;
         return { ...poly, bookingFee, platformFee, grandTotal };
@@ -56,7 +56,7 @@ export class BookService {
         entity.sequence = emptySequence
         entity.polyClinicId = polyClinicId
         const data = await this.queueRepo.create(entity)
-        if (!data) return response(res, "not found")
+        if (!data) response(res, "not found")
         await this.polyClinicService.getDetail(res, polyClinicId)
         return data
     }

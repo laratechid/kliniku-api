@@ -20,17 +20,17 @@ class Controller {
     static async getOne(req: Req, res: Res) {
         const { id } = req.params as { id: number }
         const data = await this.clinicService.getOne(res, id)
-        return response(res, data)
+        response(res, data)
     }
 
     static async getAll(req: Req, res: Res) {
         const paginate = new PaginationDto()
         const dataValue = Object.assign(paginate, req.query)
         const { valid, msg } = await validation(dataValue)
-        if (!valid) return response(res, msg, 400)
+        if (!valid) response(res, msg, 400)
         const pagination: PaginationDto = extractPaginate(dataValue)
         const [data, total] = await this.clinicService.getAll(res, pagination)
-        return responsePaginate(res, data, total, pagination.page, pagination.limit)
+        responsePaginate(res, data, total, pagination.page, pagination.limit)
 
     }
 }

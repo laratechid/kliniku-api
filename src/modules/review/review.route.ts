@@ -20,9 +20,9 @@ class Controller {
         const dto = new ReviewDto()
         const dataValue = Object.assign(dto, req.body)
         const { valid, msg } = await validation(dataValue)
-        if (!valid) return response(res, msg, 400)
+        if (!valid) response(res, msg, 400)
         const data = await this.reviewService.create(res, dataValue)
-        return response(res, data)
+        response(res, data)
     }
 }
 

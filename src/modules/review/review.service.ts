@@ -19,7 +19,7 @@ export class ReviewService{
         const review = Object.assign(entity, dto)
         const { clinicId } = review
         const isClinicExist = await this.clinicRepo.isClinicExist(clinicId)
-        if(!isClinicExist) return response(res,"clinic not found", 403)
+        if(!isClinicExist) response(res,"clinic not found", 403)
         await this.reviewRepo.create(review)
         const getRatings = await this.reviewRepo.getClinicRatings(clinicId) 
         const rating = calculateAverageRating(getRatings)

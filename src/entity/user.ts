@@ -15,6 +15,9 @@ export class User {
     @Column()
     email: string
 
+    @Column()
+    password: string
+
     @Column({ nullable: true })
     phone: string
 
@@ -23,12 +26,6 @@ export class User {
 
     @Column({ nullable: true })
     ktp: string
-
-    @Column({ nullable: true })
-    lon: string
-
-    @Column({ nullable: true })
-    lat: string
 
     @CreateDateColumn({ select: false })
     createdAt: Date

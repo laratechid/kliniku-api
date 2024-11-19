@@ -16,7 +16,7 @@ class Controller {
             fileName,
             contentType
         )
-        return response(res, data)
+        response(res, data)
     }
 }
 

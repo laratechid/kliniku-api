@@ -25,7 +25,7 @@ class Controller {
     static async getOne(req: Req, res: Res) {
         const { id } = req.params as { id: number }
         const data = await this.queueService.getOne(res, id)
-        return response(res, data)
+        response(res, data)
     }
 
     static async update(req: Req, res: Res) {
@@ -33,9 +33,9 @@ class Controller {
         const dto = new UpdateQueueDto()
         const dataValue = Object.assign(dto, req.body)
         const { valid, msg } = await validation(dataValue)
-        if (!valid) return response(res, msg, 400)
+        if (!valid) response(res, msg, 400)
         const data = await this.queueService.update(res, dataValue, id)
-        return response(res, data)
+        response(res, data)
     }
 }
 

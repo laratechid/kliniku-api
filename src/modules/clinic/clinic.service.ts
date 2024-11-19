@@ -14,7 +14,7 @@ export class ClinicService {
 
     async getOne(res: Res, id: number) {
         const data = await this.clinicRepository.getOne(id)
-        if (!data) return response(res, "not found", 400)
+        if (!data) response(res, "not found", 400)
         const currentDayCode = dayjs().day()
         const today = translateDayCode(currentDayCode)
         const schedules = data.schedules.map(res =>({

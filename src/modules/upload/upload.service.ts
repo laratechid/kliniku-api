@@ -7,7 +7,7 @@ export class UploadService{
         try {
             return await R2UploadSingle(data, fileName, contentType)
         } catch (error) {
-            return response(res, error, 500)   
+            response(res, error, 500)   
         }
     }
 }

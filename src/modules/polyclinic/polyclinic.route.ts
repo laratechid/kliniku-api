@@ -16,7 +16,7 @@ class Controller {
     static async getDetail(req: Req, res: Res) {
         const { id } = req.params as { id: number }
         const data = await this.polyClinicService.getDetail(res, id)
-        return response(res, data)
+        response(res, data)
     }
 }
 

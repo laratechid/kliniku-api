@@ -24,18 +24,18 @@ class Controller {
         const dto = new BookSummaryRequestDto()
         const dataValue = Object.assign(dto, req.query)
         const { valid, msg } = await validation(dataValue)
-        if (!valid) return response(res, msg, 400)
+        if (!valid) response(res, msg, 400)
         const data = await this.bookService.bookSummary(res, dataValue)
-        return response(res, data)
+        response(res, data)
     }
 
     static async bookQueue(req: Req, res: Res) {
             const dto = new BookQueueDto()
             const dataValue = Object.assign(dto, req.body)
             const { valid, msg } = await validation(dataValue)
-            if (!valid) return response(res, msg, 400)
+            if (!valid) response(res, msg, 400)
             const data = await this.bookService.bookQueue(res, dataValue, 1)
-            return response(res, data)
+            response(res, data)
     }
 }
 

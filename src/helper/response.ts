@@ -25,7 +25,7 @@ class ResponsePaginate {
 
 export function response(res: Res, message: any, statusCode?: number) {
     const r = new Response(statusCode ?? 200, message)
-    res.status(r.statusCode).send(r)
+    return res.status(r.statusCode).send(r)
 }
 
 export function responsePaginate(res: Res, data: any[], total: number, page: number, limit: number) {
@@ -33,5 +33,5 @@ export function responsePaginate(res: Res, data: any[], total: number, page: num
     const totalPage = Math.ceil(total / limit)
     const isHasNextPage = page < totalPage 
     const r = new ResponsePaginate(200, data, totalRows, totalPage, isHasNextPage)
-    res.status(r.statusCode).send(r)
+    return res.status(r.statusCode).send(r)
 }

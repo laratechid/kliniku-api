@@ -11,6 +11,7 @@ export const env = {
     mysqlPass: process.env.MYSQL_PASS,
 
     jwtSecret: process.env.JWT_SECRET,
+    jwtExpired: process.env.JWT_EXPIRED,
 
     googleOauthClientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
     googleOauthClientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
