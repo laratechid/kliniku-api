@@ -1,6 +1,7 @@
 import { LoginDto } from "../../dto/auth"
 import { UserDto } from "../../dto/user"
 import { User } from "../../entity/user"
+import { RegisterOpt } from "../../enum/auth"
 import { comparePassword, hashPassword } from "../../helper/bcrypt"
 import { response } from "../../helper/response"
 import { generateUUID } from "../../helper/uuid"
@@ -20,6 +21,7 @@ export class AuthService {
         const hashed = await hashPassword(password)
         dto.password = hashed
         const entity = new User()
+        entity.registerOpt = RegisterOpt.APP
         const user = Object.assign(entity, {...dto, identifier: generateUUID()})
         try {
             const registeredUser = await this.userRepo.createUser(user)

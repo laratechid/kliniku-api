@@ -1,5 +1,6 @@
 import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from "typeorm"
 import { Queue } from "./queue";
+import { RegisterOpt } from "../enum/auth";
 
 @Entity({ name: "user" })
 export class User {
@@ -15,7 +16,7 @@ export class User {
     @Column()
     email: string
 
-    @Column()
+    @Column({ nullable: true})
     password: string
 
     @Column({ nullable: true })
@@ -26,6 +27,9 @@ export class User {
 
     @Column({ nullable: true })
     ktp: string
+
+    @Column({ type: "enum", enum: RegisterOpt })
+    registerOpt: RegisterOpt
 
     @CreateDateColumn({ select: false })
     createdAt: Date
