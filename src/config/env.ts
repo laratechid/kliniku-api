@@ -13,6 +13,9 @@ export const env = {
     jwtSecret: process.env.JWT_SECRET,
     jwtExpired: process.env.JWT_EXPIRED,
 
+    jwtRefreshSecret: process.env.JWT_REFRESH_SECRET,
+    jwtRefreshExpired: process.env.JWT_REFRESH_EXPIRED,
+
     googleOauthClientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
     googleOauthClientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
     googleOauthRedirectUrl: process.env.GOOGLE_OAUTH_REDIRECT_URL,

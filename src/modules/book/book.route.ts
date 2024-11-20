@@ -11,6 +11,7 @@ import { bookSchema } from "./book.schema";
 import { QueueRepository } from "../queue/queue.repository";
 import { PolyClinicService } from "../polyclinic/polyclinic.service";
 import { middleware } from "../../middleware/middleware";
+import { UserJwtPayload } from "../../types/jwt";
 
 class Controller {
     private static bookService = new BookService(
@@ -34,7 +35,8 @@ class Controller {
             const dataValue = Object.assign(dto, req.body)
             const { valid, msg } = await validation(dataValue)
             if (!valid) response(res, msg, 400)
-            const data = await this.bookService.bookQueue(res, dataValue, 1)
+            const user = req.user as UserJwtPayload
+            const data = await this.bookService.bookQueue(res, dataValue, user.id)
             response(res, data)
     }
 }

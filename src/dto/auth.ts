@@ -13,3 +13,8 @@ export class GoogleRegisterDto {
     @IsString()
     idToken: string
 }
+
+export class RefreshTokenDto {
+    @IsString()
+    refreshToken: string
+}
