@@ -4,7 +4,8 @@
   "description": "main api of kliniku-apps",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/app.ts"
+    "dev": "nodemon src/app.ts",
+    "format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts)\""
   },
   "author": "sholehbaktiabadi",
   "license": "ISC",
@@ -45,6 +46,7 @@
     "@types/signale": "^1.4.7",
     "dotenv": "^16.4.5",
     "nodemon": "^3.1.7",
+    "prettier": "^3.4.2",
     "ts-node": "^10.9.2"
   }
 }

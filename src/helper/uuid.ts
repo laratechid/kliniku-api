@@ -1,5 +1,5 @@
-import { v6 } from "uuid"
+import { v6 } from "uuid";
 
-export function generateUUID(){
-    return v6()
+export function generateUUID() {
+  return v6();
 }

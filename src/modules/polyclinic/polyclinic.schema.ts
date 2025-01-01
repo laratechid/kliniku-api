@@ -1,4 +1,4 @@
-const tags = ["Poly Clinic"]
+const tags = ["Poly Clinic"];
 export const polyClinicSchema = {
-    getOne: { tags }
-}
+  getOne: { tags },
+};

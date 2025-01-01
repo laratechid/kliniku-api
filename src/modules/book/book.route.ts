@@ -14,35 +14,39 @@ import { middleware } from "../../middleware/middleware";
 import { UserJwtPayload } from "../../types/jwt";
 
 class Controller {
-    private static bookService = new BookService(
-        new PolyClinicRepository(db),
-        new AppSettingRepository(db),
-        new QueueRepository(db),
-        new PolyClinicService(new PolyClinicRepository(db))
-    )
+  private static bookService = new BookService(
+    new PolyClinicRepository(db),
+    new AppSettingRepository(db),
+    new QueueRepository(db),
+    new PolyClinicService(new PolyClinicRepository(db)),
+  );
 
-    static async bookSummary(req: Req, res: Res) {
-        const dto = new BookSummaryRequestDto()
-        const dataValue = Object.assign(dto, req.query)
-        const { valid, msg } = await validation(dataValue)
-        if (!valid) response(res, msg, 400)
-        const data = await this.bookService.bookSummary(res, dataValue)
-        response(res, data)
-    }
+  static async bookSummary(req: Req, res: Res) {
+    const dto = new BookSummaryRequestDto();
+    const dataValue = Object.assign(dto, req.query);
+    const { valid, msg } = await validation(dataValue);
+    if (!valid) response(res, msg, 400);
+    const data = await this.bookService.bookSummary(res, dataValue);
+    response(res, data);
+  }
 
-    static async bookQueue(req: Req, res: Res) {
-            const dto = new BookQueueDto()
-            const dataValue = Object.assign(dto, req.body)
-            const { valid, msg } = await validation(dataValue)
-            if (!valid) response(res, msg, 400)
-            const user = req.user as UserJwtPayload
-            const data = await this.bookService.bookQueue(res, dataValue, user.id)
-            response(res, data)
-    }
+  static async bookQueue(req: Req, res: Res) {
+    const dto = new BookQueueDto();
+    const dataValue = Object.assign(dto, req.body);
+    const { valid, msg } = await validation(dataValue);
+    if (!valid) response(res, msg, 400);
+    const user = req.user as UserJwtPayload;
+    const data = await this.bookService.bookQueue(res, dataValue, user.id);
+    response(res, data);
+  }
 }
 
-export function bookRoutes(route: FastifyInstance){
-    route.addHook("preHandler", middleware)
-    route.get("/summary", { schema: bookSchema.bookSummary }, (req, res)=> Controller.bookSummary(req, res))
-    route.post("/queue", { schema: bookSchema.bookQueue }, (req, res)=> Controller.bookQueue(req, res))
+export function bookRoutes(route: FastifyInstance) {
+  route.addHook("preHandler", middleware);
+  route.get("/summary", { schema: bookSchema.bookSummary }, (req, res) =>
+    Controller.bookSummary(req, res),
+  );
+  route.post("/queue", { schema: bookSchema.bookQueue }, (req, res) =>
+    Controller.bookQueue(req, res),
+  );
 }

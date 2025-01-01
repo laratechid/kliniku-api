@@ -1,1 +1,1 @@
-export const polyEvent = (polyId: number) => `POLY-${polyId}`
+export const polyEvent = (polyId: number) => `POLY-${polyId}`;

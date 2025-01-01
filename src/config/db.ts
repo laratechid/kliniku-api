@@ -10,23 +10,30 @@ import { Review } from "../entity/review";
 import { ClinicSchedule } from "../entity/schedule";
 import { AppSetting } from "../entity/app-setting";
 
-
 export const AppDataSource = new DataSource({
-    type: "mysql",
-    host: env.mysqlHost,
-    port: env.mysqlPort,
-    username: env.mysqlUser,
-    password: env.mysqlPass,
-    database: env.mysqlDb,
-    synchronize: true,
-    logging: false,
-    entities: [User, Clinic, PolyClinic, Poly, Queue, Review, ClinicSchedule, AppSetting]
-})
+  type: "mysql",
+  host: env.mysqlHost,
+  port: env.mysqlPort,
+  username: env.mysqlUser,
+  password: env.mysqlPass,
+  database: env.mysqlDb,
+  synchronize: true,
+  logging: false,
+  entities: [
+    User,
+    Clinic,
+    PolyClinic,
+    Poly,
+    Queue,
+    Review,
+    ClinicSchedule,
+    AppSetting,
+  ],
+});
 
 export async function mysqlInit() {
-    await AppDataSource.initialize()
-    const isConnected=  AppDataSource.isInitialized
-    if (!isConnected) process.exit()
-        infoLog(`is database connected ? ${isConnected}`)
+  await AppDataSource.initialize();
+  const isConnected = AppDataSource.isInitialized;
+  if (!isConnected) process.exit();
+  infoLog(`is database connected ? ${isConnected}`);
 }
-

@@ -1,4 +1,4 @@
-export enum RegisterOpt{
-    APP = "APP",
-    GOOGLE = "GOOGLE",
+export enum RegisterOpt {
+  APP = "APP",
+  GOOGLE = "GOOGLE",
 }

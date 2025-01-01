@@ -1,28 +1,35 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 
-@Entity({ name: "app_setting", orderBy: {}})
-export class AppSetting{
-    @PrimaryGeneratedColumn()
-    id: number
+@Entity({ name: "app_setting", orderBy: {} })
+export class AppSetting {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    key: string
-    
-    @Column()
-    value: string
+  @Column()
+  key: string;
 
-    @Column()
-    desc: string
+  @Column()
+  value: string;
 
-    @Column({ type: "json", nullable: true })
-    data: object;
+  @Column()
+  desc: string;
 
-    @CreateDateColumn({ select: false })
-    createdAt: Date;
+  @Column({ type: "json", nullable: true })
+  data: object;
 
-    @UpdateDateColumn({ select: false })
-    updatedAt: Date;
+  @CreateDateColumn({ select: false })
+  createdAt: Date;
 
-    @DeleteDateColumn({ select: false })
-    deletedAt: Date;
+  @UpdateDateColumn({ select: false })
+  updatedAt: Date;
+
+  @DeleteDateColumn({ select: false })
+  deletedAt: Date;
 }
