@@ -1,24 +1,33 @@
-import { IsEmail, IsNumber, IsPhoneNumber, IsString } from "class-validator"
+import {
+  IsEmail,
+  IsNumber,
+  IsPhoneNumber,
+  IsString,
+  IsStrongPassword,
+} from "class-validator";
 
 export class UserDto {
-    @IsString()
-    name: string
+  @IsString()
+  name: string;
 
-    @IsEmail()
-    email: string
+  @IsEmail()
+  email: string;
 
-    @IsPhoneNumber()
-    phone: string
+  @IsPhoneNumber()
+  phone: string;
 
-    @IsNumber()
-    age: number
+  @IsStrongPassword({ minLength: 8, minNumbers: 1 })
+  password: string;
 
-    @IsString()
-    ktp: string
+  // @IsNumber()
+  // age: number
 
-    @IsString()
-    lon: string
+  // @IsString()
+  // ktp: string
 
-    @IsString()
-    lat: string
+  // @IsString()
+  // lon: string
+
+  // @IsString()
+  // lat: string
 }

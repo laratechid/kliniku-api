@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { Server } from "socket.io"
+import { Server } from "socket.io";
 import { Res } from "../types/fastify";
 import { response } from "../helper/response";
 
@@ -11,6 +11,6 @@ export const initSocketIO = (httpServer: FastifyInstance) => {
 };
 
 export const emitEvent = (res: Res, event: string, data: any) => {
-  if (!io) return response(res, "Socket.IO not initialized", 400)
+  if (!io) response(res, "Socket.IO not initialized", 400);
   io.emit(event, data);
 };

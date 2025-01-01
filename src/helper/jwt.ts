@@ -1,10 +1,22 @@
 import jwt from "jsonwebtoken";
 import { env } from "../config/env";
 
-export function generateToken(claim: string | object) {
-    return jwt.sign(claim, env.jwtSecret, { algorithm: "HS256" })
+export function generateJwtRefreshToken(payload: any) {
+  return jwt.sign(payload, env.jwtRefreshSecret, {
+    algorithm: "HS256",
+    expiresIn: env.jwtRefreshExpired,
+  });
 }
 
-export function s(token: string) {
-    return jwt.verify(token, env.jwtSecret, { algorithms: ["HS256"] })
+export function decodeRefreshToken(refreshToken: string) {
+  return jwt.decode(refreshToken);
+}
+
+export function validateJwtRefreshToken(refreshToken: string) {
+  try {
+    jwt.verify(refreshToken, env.jwtRefreshSecret, { algorithms: ["HS256"] });
+    return true;
+  } catch {
+    return false;
+  }
 }

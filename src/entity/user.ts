@@ -1,44 +1,53 @@
-import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from "typeorm"
+import {
+  Entity,
+  Column,
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  OneToMany,
+} from "typeorm";
 import { Queue } from "./queue";
+import { RegisterOpt } from "../enum/auth";
 
 @Entity({ name: "user" })
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
-    
-    @Column({ type: "text" })
-    identifier: string
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    name: string
+  @Column({ type: "text" })
+  identifier: string;
 
-    @Column()
-    email: string
+  @Column()
+  name: string;
 
-    @Column({ nullable: true })
-    phone: string
+  @Column()
+  email: string;
 
-    @Column({ nullable: true })
-    age: number
+  @Column({ nullable: true })
+  password: string;
 
-    @Column({ nullable: true })
-    ktp: string
+  @Column({ nullable: true })
+  phone: string;
 
-    @Column({ nullable: true })
-    lon: string
+  @Column({ nullable: true })
+  age: number;
 
-    @Column({ nullable: true })
-    lat: string
+  @Column({ nullable: true })
+  ktp: string;
 
-    @CreateDateColumn({ select: false })
-    createdAt: Date
-    
-    @UpdateDateColumn({ select: false })
-    updatedAt: Date
+  @Column({ type: "enum", enum: RegisterOpt })
+  registerOpt: RegisterOpt;
 
-    @DeleteDateColumn({ select: false })
-    deletedAt: Date
+  @CreateDateColumn({ select: false })
+  createdAt: Date;
 
-    @OneToMany(() => Queue, (queue) => queue.user)
-    queue: Queue[];
+  @UpdateDateColumn({ select: false })
+  updatedAt: Date;
+
+  @DeleteDateColumn({ select: false })
+  deletedAt: Date;
+
+  @OneToMany(() => Queue, (queue) => queue.user)
+  queue: Queue[];
 }
