@@ -20,10 +20,3 @@ $ npm run dev
 $ npm run build
 $ npm run start
 ```
-
-## Run with Docker
-
-```bash
-$ docker-compose up
-```
-<br>
